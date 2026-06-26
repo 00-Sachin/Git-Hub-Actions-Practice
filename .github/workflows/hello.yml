@@ -1,0 +1,20 @@
+# Workflow 
+# should have a name
+name: hello
+
+# Jobs
+#jobs should be inside the workflow
+
+jobs:
+  say-hello:
+  # creates an ephemeral Container with Ubuntu running 
+    runs-on: ubuntu-latest
+    steps:
+    # the epheraml container will have steps to execute, hence name those steps and use run: run has the command 
+      - name: say hello to everyone
+        run: echo "Hello world "
+# Steps 
+# steps should be inside the jobs 
+
+# Actions 
+# actions should be inside the steps 
