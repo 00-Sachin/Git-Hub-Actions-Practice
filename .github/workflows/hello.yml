@@ -1,7 +1,9 @@
 # Workflow 
 # should have a name
 name: hello
-
+on: 
+  workflow_dispatch:
+    
 # Jobs
 #jobs should be inside the workflow
 
