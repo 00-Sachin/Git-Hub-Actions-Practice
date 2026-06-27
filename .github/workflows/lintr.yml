@@ -1,0 +1,21 @@
+name: lintr-check
+
+on:
+  push:
+    paths: "*.py"
+  
+jobs:
+  code:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone the code
+        uses: actions/checkout@v6
+      
+      - name: INSTALL LINTER
+        run: pip install ruff
+      
+      - name: Runing Linter check
+        run: ruff check .
+    
+    
+  
