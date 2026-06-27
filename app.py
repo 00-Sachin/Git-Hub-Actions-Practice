@@ -10,7 +10,7 @@ c = 7
 # c = float(input('Enter third side: '))
 
 # calculate the semi-perimeter
-s = (a + b + c) / 2
+s = (a + b + d) / 2
 
 # calculate the area
 area = (s*(s-a)*(s-b)*(s-c)) ** 0.5
