@@ -1,22 +1,26 @@
-# Workflow 
-# should have a name
-name: hello
-on: 
-  workflow_dispatch:
-    
-# Jobs
-#jobs should be inside the workflow
+name: First GitHub Actions Workflow
+
+on:
+  push:
 
 jobs:
-  say-hello:
-  # creates an ephemeral Container with Ubuntu running 
+  greet:
     runs-on: ubuntu-latest
     steps:
-    # the epheraml container will have steps to execute, hence name those steps and use run: run has the command 
-      - name: say hello to everyone
-        run: echo "Hello world "
-# Steps 
-# steps should be inside the jobs 
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
-# Actions 
-# actions should be inside the steps 
+      - name: Print Greeting
+        run: echo "Hello from GitHub Actions!"
+
+      - name: Print Date and Time
+        run: date
+
+      - name: Print Branch Name
+        run: echo "The branch triggering this run is ${{ github.ref_name }}"
+
+      - name: List Repository Files
+        run: ls -la
+
+      - name: Print Runner Operating System
+        run: echo "The runner OS is ${{ runner.os }}"
