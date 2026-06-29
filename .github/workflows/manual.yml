@@ -8,7 +8,7 @@ on:
         required: true
         default: 'production'
 jobs:
-  display:
+  display: 
     runs-on: ubuntu-latest
     steps:
       - name: Display the deployment environment
