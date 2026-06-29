@@ -2,7 +2,7 @@ name: manual
 on:
   workflow_dispatch:
     inputs:
-      deployment_env:git s
+      deployment_env:
         type: string
         description: 'staging/production'
         required: true
