@@ -2,7 +2,7 @@ name: manual
 on:
   workflow_dispatch:
     inputs:
-      deployment_env:
+      deployment_env:git s
         type: string
         description: 'staging/production'
         required: true
@@ -12,4 +12,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Display the deployment environment
-        run: echo "Deploying to ${{ github.event.inputs.deployment_env }}"
+        run: echo "Deploying to the ${{ github.event.inputs.deployment_env }} environment"
