@@ -8,29 +8,13 @@ jobs:
     name: Ubuntu Runner Info
     runs-on: ubuntu-latest
     steps:
-      - name: Print Runner Information
+      - name: Print the pre installed versions
         run: |
-          echo "OS Name: Linux (Ubuntu)"
-          echo "Hostname: $(hostname)"
-          echo "Current User: $(whoami)"
 
-  windows-job:
-    name: Windows Runner Info
-    runs-on: windows-latest
-    steps:
-      - name: Print Runner Information
-        shell: cmd
-        run: |
-          echo OS Name: Windows
-          echo Hostname: %COMPUTERNAME%
-          echo Current User: %USERNAME%
+          docker --version
+          python3 --version
+          node --version
+          git --version
+      
+      
 
-  macos-job:
-    name: macOS Runner Info
-    runs-on: macos-latest
-    steps:
-      - name: Print Runner Information
-        run: |
-          echo "OS Name: macOS"
-          echo "Hostname: $(hostname)"
-          echo "Current User: $(whoami)"
