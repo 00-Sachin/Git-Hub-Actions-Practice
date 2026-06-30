@@ -4,7 +4,7 @@ on:
   
 jobs:
   self-hosted-job:
-    runs-on: self-hostde
+    runs-on: self-hosted
     steps:
       - name: Print Machine Hostname
         run: |
