@@ -1,41 +1,36 @@
-name: Github Hosted
+name: GitHub-Hosted Runners Info
+
 on:
   workflow_dispatch:
+
 jobs:
-  job1:
+  ubuntu-job:
+    name: Ubuntu Runner Info
     runs-on: ubuntu-latest
     steps:
+      - name: Print Runner Information
+        run: |
+          echo "OS Name: Linux (Ubuntu)"
+          echo "Hostname: $(hostname)"
+          echo "Current User: $(whoami)"
 
-      - name: Print the OS
-        run: echo "The runner OS is ${{ runner.os }}"
-
-      - name: Print the Runner Hostname
-        run: echo "The runner hostname is ${{ runner.hostname }}"
-
-      - name: Print the current user running the job
-        run: echo "The current user is ${{ runner.user }}"
-  job2:
+  windows-job:
+    name: Windows Runner Info
     runs-on: windows-latest
-
     steps:
+      - name: Print Runner Information
+        shell: cmd
+        run: |
+          echo OS Name: Windows
+          echo Hostname: %COMPUTERNAME%
+          echo Current User: %USERNAME%
 
-      - name: Print the OS
-        run: echo "The runner OS is ${{ runner.os }}"
-
-      - name: Print the Runner Hostname
-        run: echo "The runner hostname is ${{ runner.hostname }}"
-
-      - name: Print the current user running the job
-        run: echo "The current user is ${{ runner.user }}"
-  job3:
+  macos-job:
+    name: macOS Runner Info
     runs-on: macos-latest
     steps:
-
-      - name: Print the OS
-        run: echo "The runner OS is ${{ runner.os }}"
-
-      - name: Print the Runner Hostname
-        run: echo "The runner hostname is ${{ runner.hostname }}"
-
-      - name: Print the current user running the job
-        run: echo "The current user is ${{ runner.user }}"
+      - name: Print Runner Information
+        run: |
+          echo "OS Name: macOS"
+          echo "Hostname: $(hostname)"
+          echo "Current User: $(whoami)"
