@@ -1,0 +1,23 @@
+name: Self hosted Runner Workflow
+on:
+  workflow_dispatch:
+  
+jobs:
+  self-hosted-job:
+    runs-on: self-hostde
+    steps:
+      - name: Print Machine Hostname
+        run: |
+          echo "=== Hostname ==="
+          hostname
+
+      - name: Print Working Directory
+        run: |
+          echo "=== Working Directory ==="
+          pwd
+
+      - name: Create Persistent File
+        run: |
+          echo "Created by GitHub Actions self-hosted runner" > github_test_marker.txt
+          echo "=== File Verification ==="
+          ls -la github_test_marker.txt
