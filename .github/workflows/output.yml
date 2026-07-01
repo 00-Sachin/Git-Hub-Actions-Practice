@@ -1,0 +1,29 @@
+name: Task 3 - Job Outputs
+
+on:
+  workflow_dispatch:
+
+jobs:
+  generate-date:
+    runs-on: ubuntu-latest
+    # Map the step output to a job-level output
+    outputs:
+      current_date: ${{ steps.set-date.outputs.date }}
+    
+    steps:
+      - name: Generate Date String
+        id: set-date
+        run: |
+          # Format today's date as YYYY-MM-DD
+          TODAY=$(date +'%Y-%m-%d')
+          echo "date=$TODAY" >> $GITHUB_OUTPUT 
+
+  consume-date:
+    runs-on: ubuntu-latest
+    # Require the first job to finish before this one starts
+    needs: generate-date
+    
+    steps:
+      - name: Print Received Date
+        run: |
+          echo "The date received from the previous job is: ${{ needs.generate-date.outputs.current_date }}"
