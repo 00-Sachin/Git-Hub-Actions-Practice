@@ -1,0 +1,49 @@
+name: Task 4 - Conditionals
+
+on:
+  push:
+    branches: [ "main", "feature/*" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  # Job 1: Runs on any event triggering the workflow
+  general-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 1. A step that only runs when the branch is main
+      - name: Main Branch Only Step
+        if: github.ref == 'refs/heads/main'
+        run: echo "This step only runs on the main branch!"
+
+      # Intentional failure to test the next step
+      - name: Force a failure step
+        id: force-fail
+        run: exit 1
+
+      # 2. A step that only runs when the previous step failed
+      - name: Handle Failure Step
+        if: failure()
+        run: echo "The previous step failed! Running cleanup or alert..."
+
+      # 3. A step with continue-on-error: true
+      - name: Risky Step that can fail safely
+        continue-on-error: true
+        run: |
+          echo "This command will fail, but the job will keep going."
+          exit 1
+
+      - name: Post Continue-on-Error Step
+        run: echo "See? I still ran because of continue-on-error!"
+
+  # 4. A job that only runs on push events, not on pull requests
+  push-only-job:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    steps:
+      - name: Push specific task
+        run: echo "This entire job only runs on PUSH events."
