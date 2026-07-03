@@ -1,6 +1,6 @@
 name: task 4 Conditional Workflow
 on:
-  workflow_dispatch:
+  push: 
 jobs:
   conditional-job:
     runs-on: ubuntu-latest
