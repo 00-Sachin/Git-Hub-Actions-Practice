@@ -1,49 +1,32 @@
-name: Task 4 - Conditionals
-
+name: task 4 Conditional Workflow
 on:
-  push:
-    branches: [ "main", "feature/*" ]
-  pull_request:
-    branches: [ "main" ]
   workflow_dispatch:
-
 jobs:
-  # Job 1: Runs on any event triggering the workflow
-  general-checks:
+  conditional-job:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      # 1. A step that only runs when the branch is main
-      - name: Main Branch Only Step
+      - name: Runs only if the branch is main
         if: github.ref == 'refs/heads/main'
-        run: echo "This step only runs on the main branch!"
+        run: echo "This step runs only on the main branch."
 
-      # Intentional failure to test the next step
-      - name: Force a failure step
-        id: force-fail
-        run: exit 1
+      # a custom failure step 
+      - name: Custom Failure
+        run: echo "This step will fail intentionally." && exit 1
+        
+      # a step that runs only if the previous step fails
 
-      # 2. A step that only runs when the previous step failed
-      - name: Handle Failure Step
+      - name: Custom Failure Step
         if: failure()
-        run: echo "The previous step failed! Running cleanup or alert..."
+        run: echo "This step runs only if the previous step fails." 
 
-      # 3. A step with continue-on-error: true
-      - name: Risky Step that can fail safely
-        continue-on-error: true
-        run: |
-          echo "This command will fail, but the job will keep going."
-          exit 1
-
-      - name: Post Continue-on-Error Step
-        run: echo "See? I still ran because of continue-on-error!"
-
-  # 4. A job that only runs on push events, not on pull requests
-  push-only-job:
+  push-event: 
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
     steps:
-      - name: Push specific task
-        run: echo "This entire job only runs on PUSH events."
+      - name: Push Event Step
+        run: echo "This step runs only on push events." 
+        
+      - name: error-escape
+        continue-on-error: true
+        run: npm run lint-experimental && echo "This step will continue even if it fails."    
+  
