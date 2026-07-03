@@ -16,7 +16,9 @@ jobs:
         run: |
           # Format today's date as YYYY-MM-DD
           TODAY=$(date +'%Y-%m-%d')
-          echo "date=$TODAY" >> $GITHUB_OUTPUT
+
+
+          echo "date=$TODAY" >> $GITHUB_OUTPUT 
 
   consume-date:
     runs-on: ubuntu-latest
