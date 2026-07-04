@@ -1,0 +1,22 @@
+name: git_hub_secret
+on:
+  push:
+  
+jobs:
+  reading_secret:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Secret Existence
+        run: |
+                if [ -n "$MY_SECRET" ]; then
+                  echo "The secret is set: true"
+                else
+                  echo "The secret is set: false"
+                fi
+
+      - name: Read secret
+        run: |
+          echo "The secret value is: ${{ secrets.MY_SECRET_MESSAGE }}"
+
+      
+  
