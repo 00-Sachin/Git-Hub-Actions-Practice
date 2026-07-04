@@ -18,5 +18,11 @@ jobs:
         run: |
           echo "The secret value is: ${{ secrets.MY_SECRET_MESSAGE }}"
 
+      - name : Use secrate as environment variable
+        run: |
+          echo "The secret value is: $MY_SECRET_MESSAGE"  
+
+          
+
       
   
