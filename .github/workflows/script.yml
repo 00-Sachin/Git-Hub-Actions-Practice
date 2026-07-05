@@ -1,0 +1,28 @@
+name: system_check thrugh shell script
+on:
+  push:
+jobs:
+  system_check:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./Git-Hub-Actions-Practice
+    steps:
+      - name: Check out the repository code
+        uses: actions/checkout@v6
+      
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y curl
+      
+      - name: Run System Check Script
+        run: |
+          chmod +x ./system_info.sh
+          ./system_info.sh 
+      
+      - name: Fail the job if the script fails
+        if: failure()
+        run: |
+          echo "System check script failed. Please check the logs for details."
+          exit 1                  
