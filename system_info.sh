@@ -35,7 +35,7 @@ cpu_usage() {
 }
 
 main() {
-	os_info
+	os_inf
 	uptime_status
 	disk_usage
 	mem_usage
