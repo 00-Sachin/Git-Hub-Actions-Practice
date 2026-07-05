@@ -19,17 +19,16 @@ jobs:
             echo "Generating access logs..."
             curl -I http://localhost
             echo "Access logs generated."
-
-      - name: Generate Error Logs
-        run: |
-            echo "Generating error logs..."
-            curl -I http://localhost/nonexistent
-            echo "Error logs generated."
        
       - name: Show NGINX Logs
         if: always()
         run: |
             echo "--- Access Logs ---"
             sudo cat /var/log/nginx/access.log  
-            echo "--- Error Logs ---"
-            sudo cat /var/log/nginx/error.log
+
+      - name: Upload Artifact for Access Logs
+        uses: actions/upload-artifact@v4
+        with:
+            name: nginx-access-logs
+            path: /var/log/nginx/access.log
+            retention-days: 5
