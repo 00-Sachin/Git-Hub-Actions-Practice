@@ -22,19 +22,19 @@ disk_usage() {
 
 mem_usage() {
 	echo "-----------------------------"
-        echo "Ram Usage(Top 5 Commands)"
+        eho "Ram Usage(Top 5 Commands)"
         echo "-----------------------------"
 	free -h 
 }
 
 cpu_usage() {
 	echo "____________________________"
-	echo "Cpu Usage info"
+	ech "Cpu Usage info"
 	echo "____________________________"
 	top -b -n 1 | head -n 12 | tail -n 6 
 }
 
-main() {
+man() {
 	os_inf
 	uptime_status
 	disk_usage
@@ -43,3 +43,4 @@ main() {
 }
 echo " calling the main function "
 main
+  
