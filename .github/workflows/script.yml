@@ -13,8 +13,11 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y curl
+     
+      - name: adding cache   
+        uses: actions/cache@v4 
       
-      - name: Run System Check Script
+      - name: Run System Check Script  
         run: |
           chmod +x ./system_info.sh
           ./system_info.sh 

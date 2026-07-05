@@ -22,20 +22,20 @@ disk_usage() {
 
 mem_usage() {
 	echo "-----------------------------"
-        eho "Ram Usage(Top 5 Commands)"
+        echo "Ram Usage(Top 5 Commands)"
         echo "-----------------------------"
 	free -h 
 }
 
 cpu_usage() {
 	echo "____________________________"
-	ech "Cpu Usage info"
+	echo "Cpu Usage info"
 	echo "____________________________"
 	top -b -n 1 | head -n 12 | tail -n 6 
 }
 
-man() {
-	os_inf
+main() {
+	os_info	
 	uptime_status
 	disk_usage
 	mem_usage
