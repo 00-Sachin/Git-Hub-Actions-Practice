@@ -32,3 +32,11 @@ jobs:
             name: nginx-access-logs
             path: /var/log/nginx/access.log
             retention-days: 5
+  download:
+    runs-on: ubuntu-latest
+    needs: main
+    steps:
+      - name: Download Artifact for Access Logs
+        uses: actions/download-artifact@v4
+        with:
+            name: nginx-access-logs
