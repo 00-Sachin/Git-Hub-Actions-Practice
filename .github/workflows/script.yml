@@ -14,8 +14,14 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y curl
      
-      - name: adding cache   
+      - name: adding cache for the script
         uses: actions/cache@v4 
+        with:
+          path: ./system_info.sh
+          key: ${{ runner.os }}-script-run-${{ github.sha }}
+         # Falls back to the most recent cache available if an exact match isn't found
+          restore-keys: |
+            ${{ runner.os }}-script-run-
       
       - name: Run System Check Script  
         run: |
