@@ -4,10 +4,6 @@ on:
 jobs:
   system_check:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./Git-Hub-Actions-Practice
-
     steps:
 
       - name: Check out the repository code
@@ -20,8 +16,8 @@ jobs:
       
       - name: Run System Check Script
         run: |
-          chmod +x Git-Hub-Actions-Practice/system_info.sh
-          ./Git-Hub-Actions-Practice/system_info.sh 
+          chmod +x ./system_info.sh
+          ./system_info.sh 
       
       - name: Fail the job if the script fails
         if: failure()
