@@ -27,6 +27,12 @@ jobs:
    outputs:
       version: ${{ steps.gen_version.outputs.version }}
    steps:
+    - name: Generate build version
+      id: gen_version
+      run: |
+          SHORT_SHA=$(git rev-parse --short HEAD)
+          VERSION="v1.0-${SHORT_SHA}"
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
     - name: Check out the repository code
       uses: actions/checkout@v6
 
@@ -38,9 +44,3 @@ jobs:
       run: |
        echo "Docker Token is set: true" 
 
-    - name: Generate build version
-      id: gen_version
-      run: |
-          SHORT_SHA=$(git rev-parse --short HEAD)
-          VERSION="v1.0-${SHORT_SHA}"
-          echo "version=${VERSION}" >> $GITHUB_OUTPUT
