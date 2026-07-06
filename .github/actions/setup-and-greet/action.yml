@@ -35,7 +35,7 @@ runs:
         fi
 
     - name: Print date and Runner os 
-      shell: bash
+      shell: bash 
       run: |
         echo "Current date and time: $(date)"
-        echo "Running on OS: $( runner.os)"
+        echo "Running on OS: ${{ runner.os }}"  
