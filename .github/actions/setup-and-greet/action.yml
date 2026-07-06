@@ -1,0 +1,41 @@
+name: setup and greet
+
+description: 'A custom action to setup and greet the user'
+
+inputs:
+  
+  name:
+    description: 'The name of the user to greet'
+    required: true
+
+  language:
+    description: 'The language to use for the greeting(en , es, fr)'
+    required: false
+    default: 'en'
+ 
+outputs:
+  greeting:
+    description: 'confiramtion that the greeting was successful'
+    value: true
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Print localized greeting
+      shell: bash
+      run: |
+        if [ "${{ inputs.language }}" == "en" ]; then
+          echo "Hello, ${{ inputs.name }}!"
+        elif [ "${{ inputs.language }}" == "es" ]; then
+          echo "¡Hola, ${{ inputs.name }}!"
+        elif [ "${{ inputs.language }}" == "fr" ]; then
+          echo "Bonjour, ${{ inputs.name }}!"
+        else
+          echo "Hello, ${{ inputs.name }}! (default greeting)"
+        fi
+
+    - name: Print date and Runner os 
+      shell: bash
+      run: |
+        echo "Current date and time: $(date)"
+        echo "Running on OS: $( runner.os)"
