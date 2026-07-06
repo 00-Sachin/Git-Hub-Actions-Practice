@@ -18,7 +18,4 @@ jobs:
             with:
               name: "John Doe"
               language: "es"
-         
-          - name: verify action output flag
-            run: |
-              echo "Was the user greeted successfully? ${{ steps.greet_step.outputs.greeted }}"
+          
