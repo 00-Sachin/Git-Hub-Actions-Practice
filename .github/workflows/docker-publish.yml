@@ -32,3 +32,4 @@ jobs:
             ${{ secrets.DOCKER_USERNAME }}/github-actions-practice:latest
             ${{ secrets.DOCKER_USERNAME }}/github-actions-practice:sha-${{ env.sha_short }}
           path: ./index.html
+  
