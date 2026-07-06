@@ -22,25 +22,29 @@ on:
         required: true
 jobs:
  build:
-   runs-on: ubuntu-latest
-       # 2. Declare that this job outputs a variable named 'version'
+   runs-on: ubuntu-latest    
+
+# 2. Declare that this job outputs a variable named 'version'
+
    outputs:
       version: ${{ steps.gen_version.outputs.version }}
-   steps:
+   steps: 
+  
+    - name: Check out the repository code
+      uses: actions/checkout@v6
+
     - name: Generate build version
       id: gen_version
       run: |
           SHORT_SHA=$(git rev-parse --short HEAD)
           VERSION="v1.0-${SHORT_SHA}"
           echo "version=${VERSION}" >> $GITHUB_OUTPUT
-    - name: Check out the repository code
-      uses: actions/checkout@v6
 
     - name: Print build information
       run: | 
        echo "Building ${{ inputs.app_name }} for environment: ${{ inputs.env }}"
 
-    - name: DOcker Token status
+    - name: Docker Token status
       run: |
        echo "Docker Token is set: true" 
 
