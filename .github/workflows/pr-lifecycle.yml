@@ -1,0 +1,29 @@
+name: Pull Request Event Types
+on:
+  pull_request:
+    types: [opened, closed, reopened, synchronize]
+jobs:
+    pr_lifecycle:
+        runs-on: ubuntu-latest
+        steps:
+        - name: Checkout repository
+          uses: actions/checkout@v6
+       
+        - name: Print PR event type
+          run: |
+            echo "Pull Request event type: ${{ github.event.action }}"
+        - name: Print PR title
+          run: |
+            echo "Pull Request title: ${{ github.event.pull_request.title }}"
+        - name: Print PR author
+          run: |
+            echo "Pull Request author: ${{ github.event.pull_request.user.login }}"
+        - name: Print the source branch and target branch of the PR
+          run: |
+            echo "Pull Request source branch: ${{ github.event.pull_request.head.ref }}"    
+            echo "Pull Request target branch: ${{ github.event.pull_request.base.ref }}"
+
+        - name: Conditional step only runs when PR is merged
+          if: ${{ github.event.action == 'closed' && github.event.pull_request.merged == true }}
+          run: |
+            echo "This step runs only when a PR is merged."
