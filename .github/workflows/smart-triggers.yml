@@ -5,9 +5,7 @@ on:
     paths:
       - 'src/**'
       - 'app/**'
-    paths-ignore:
-      - '*.md'
-      - 'docs/**'
+
     branches:
       - main
       - release/*
@@ -18,4 +16,4 @@ jobs:
       - name: this step print a hellow msg
         run: |
             echo "hellow dosto"
-
+  
