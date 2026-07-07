@@ -1,0 +1,21 @@
+name: Path & Branch Filters
+
+on:
+  push:
+    paths:
+      - 'src/**'
+      - 'app/**'
+    paths-ignore:
+      - '*.md'
+      - 'docs/**'
+    branches:
+      - main
+      - release/*
+jobs: 
+    printing-the-status:
+     runs-on: ubuntu:latest
+     steps:
+      - name: this step print a hellow msg
+        run: |
+            echo "hellow dosto"
+
