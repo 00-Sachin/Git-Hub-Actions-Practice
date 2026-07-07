@@ -1,0 +1,19 @@
+name: External Trigger (Repository Dispatch)
+
+on:
+  repository_dispatch:
+    types: 
+      - deploy-request
+
+jobs:
+  handle-dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Acknowledge Request
+        run: |
+          echo "🚀 Received a repository dispatch event!"
+          echo "Target Environment: ${{ github.event.client_payload.environment }}"
+          
+          if [ "${{ github.event.client_payload.environment }}" == "production" ]; then
+            echo "::warning::Production deployment requested! Proceeding with caution."
+          fi
