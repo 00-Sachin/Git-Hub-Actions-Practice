@@ -5,15 +5,14 @@ on:
     paths:
       - 'src/**'
       - 'app/**'
-
     branches:
       - main
-      - release/*
+      - 'release/*'
+
 jobs: 
-    printing-the-status:
-     runs-on: ubuntu:latest
-     steps:
-      - name: this step print a hellow msg
+  printing-the-status:
+    runs-on: ubuntu-latest # Fixed the colon to a hyphen
+    steps:
+      - name: This step prints a hello msg
         run: |
-            echo "hellow dosto"
-   
+          echo "hellow dosto"
