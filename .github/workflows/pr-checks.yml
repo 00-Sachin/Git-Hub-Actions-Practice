@@ -1,0 +1,66 @@
+name: PR validation Workflow
+on:
+    pull_request:
+        branches:
+            - main
+
+jobs:
+    file-size-check:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Fail if new files are committed over 1000KiB
+              id: size_check
+              uses: pelotech/github-action-file-size-checker@v0.2.1
+              with:
+               max_file_size_kib: '1000'
+
+            - name: Post comment when violations exist
+              if: failure()
+              uses: peter-evans/create-or-update-comment@v4
+              with:
+               issue-number: ${{ github.event.pull_request.number }}
+               body: |
+                  ## New File Size Violation Detected
+
+                  The following files exceed **${{ steps.size_check.outputs.max_size_human }}**:
+
+                  ${{ steps.size_check.outputs.violations_list }}
+
+                  Please shrink or remove the files above the limit.
+    branch-name-check:
+        runs-on: ubuntu-latest
+        if: always() 
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Validate Branch Name
+           # Example: Enforces that the branch name must start with 'feature/', 'fix/', or 'docs/'
+              if: |
+                !startsWith(github.head_ref, 'feature/') && 
+                !startsWith(github.head_ref, 'fix/') && 
+                !startsWith(github.head_ref, 'docs/')
+              run: |
+                echo "::ERROR:: Invalid branch name '${{ github.head_ref }}'."
+                echo "::ERROR:: Branches must start with 'feature/', 'fix/', or 'docs/'."
+                exit 1
+    pr-body-check:
+        runs-on: ubuntu-latest
+        if: always()
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+
+            - name: Reads the PR body
+              id: read_pr_body
+              run: |
+                echo "PR Body: ${{ github.event.pull_request.body }}" 
+                
+            - name: Warns if PR body is empty
+              if: github.event.pull_request.body == ''
+              run: |
+                echo "::WARNING:: PR body is empty. Please provide a description for the changes."
+
