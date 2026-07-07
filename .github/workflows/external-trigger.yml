@@ -1,6 +1,6 @@
 name: External Trigger (Repository Dispatch)
 
-on:
+on: 
   repository_dispatch:
     types: 
       - deploy-request
