@@ -18,7 +18,7 @@ jobs:
         - name: Print PR author
           run: |
             echo "Pull Request author: ${{ github.event.pull_request.user.login }}"
-        - name: Print the source branch and target branch of the PR
+        - name: Print the source branch and target branch of PR
           run: |
             echo "Pull Request source branch: ${{ github.event.pull_request.head.ref }}"    
             echo "Pull Request target branch: ${{ github.event.pull_request.base.ref }}"

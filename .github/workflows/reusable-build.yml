@@ -29,7 +29,6 @@ jobs:
    outputs:
       version: ${{ steps.gen_version.outputs.version }}
    steps: 
-  
     - name: Check out the repository code
       uses: actions/checkout@v6
 
