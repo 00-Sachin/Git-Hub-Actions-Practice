@@ -22,7 +22,7 @@ This repository contains active GitHub Actions workflows located in the `.github
    * **Deployment:** If the push is on the `main` branch, the image is automatically pushed to the public Docker Hub registry.
 
 ## 🚀 How to Run the Latest Image
-Because this project uses automated CI/CD, the latest version of the application is always available on Docker Hub. You can pull and run the live container on any machine using the following command:
+Because this project uses automated CI/CD, the latest version of the application is always available on Docker Hub. You can easily pull and run the live container on any machine using the following command:
 
 ```bash
 docker run -d -p 8080:80 Sachinkrc/github-actions-practice:latest 
