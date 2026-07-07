@@ -1,0 +1,20 @@
+name: Run Tests
+
+on:
+  push:
+    branches:
+      - main # Triggers whenever code is pushed to main
+
+jobs:
+  run-unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Execute Tests
+        run: |
+          echo "Running unit tests..."
+          # To test a failure scenario later, you can change 'exit 0' to 'exit 1'
+          echo "✅ All tests passed!"
+          exit 0

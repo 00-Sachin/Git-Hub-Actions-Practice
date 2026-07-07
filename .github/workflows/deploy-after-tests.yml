@@ -1,0 +1,29 @@
+name: Deploy After Tests
+
+on:
+  workflow_run:
+    workflows: ["Run Tests"]
+    types: 
+      - completed
+
+jobs:
+  deploy-to-prod:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if tests succeeded
+        # This bash script handles the conditional check and the warning/exit requirement
+        run: |
+          CONCLUSION="${{ github.event.workflow_run.conclusion }}"
+          
+          if [ "$CONCLUSION" != "success" ]; then
+            echo "::error::The 'Run Tests' workflow failed or was cancelled (Status: $CONCLUSION). Aborting deployment!"
+            exit 1
+          fi
+          
+          echo "✅ Tests passed! Proceeding with deployment..."
+
+      - name: Mock Deployment Step
+        # This step only runs if the previous step didn't exit 1
+        run: |
+          echo "Deploying application to production servers..."
+          echo "🚀 Deployment complete!"
