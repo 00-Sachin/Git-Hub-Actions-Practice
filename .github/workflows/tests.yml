@@ -17,4 +17,4 @@ jobs:
           echo "Running unit tests..."
           # To test a failure scenario later, you can change 'exit 0' to 'exit 1'
           echo "✅ All tests passed!"
-          exit 0
+          exit 1
